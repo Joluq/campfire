@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Edit Activity</h1>
+        <form style="width: 30%; margin: 0 auto;" action="/activities/<%= activity._id %>/?_method=PUT" method="POST">
+            <div class="form-group">
+                <input class="form-control" type="text" name="activity[title]" placeholder="title" value="<%= activity.title %>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="activity[image]" placeholder="image url" value="<%= activity.image %>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="date" name="activity[date]" placeholder="date" value="<%= activity.date %>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="time" placeholder="time" pattern="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" value="<%= activity.time %>/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="activity[location]" placeholder="location" value="<%= activity.location %>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="activity[ppl_limit]" placeholder="number of people" value="<%= activity.ppl_limit %>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="activity[description]" placeholder="description" value="<%= activity.description %>">
+            </div>
+            <div class="form-group">
+				<button class="btn btn-lg btn-default btn-block">Submit!</button>
+			</div>
+        </form>
+        
+        <a href="/activities">Go back</a>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>

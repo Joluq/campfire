@@ -1,0 +1,91 @@
+<% include ../partials/header %>
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Welcome to Campfire!</h1>
+			<p>Have an activity in mind you want to do with others? Start one.</p>
+			<p><a class="btn btn-primary btn-large" href="/activities/new">Add New Activity</a></p>
+			</p>
+		</div>
+	</header>
+	
+<div class="row">
+	<div class="col-xs-8 col-md-8">
+		<form style="width: 80%;" action="#" method="POST">
+			<div class="form-group">
+                <input class="form-control" type="search" name="search" placeholder="Search Activities">
+            </div>
+		</form>
+		<h2>@ UW</h2>
+	</div>
+	<div class="col-xs-4 col-md-4">
+		
+	</div>
+</div>
+
+<div id="activities" class="row list-group">
+	<div style="float: right" class="col-xs-12 col-md-4">
+		<div style="padding: 20px;" class="thumbnail">
+			<h5>What can you do with Campfire?</h5>
+			<p>
+				You can go to a music festival with fellow students. See if people want to join 
+				and watch netflix at your apartment, paint some rocks, fly some kites, or play spikeball
+				at the park today. 
+			</p>
+			<p>
+				Please show up on time once you have joined an activity. You are considered a bad human
+				if you can't keep promises. 
+			</p>
+		</div>
+	</div>
+	<% activities.forEach(function(activity){ %>
+        <div class="item  col-xs-12 col-md-8">
+            <div class="thumbnail">
+			    <div class="row">
+			        <div class="col-md-2 text-center">
+			        	<img style="float: left; margin: 5px; width: 100px; height: 137px;" class="group list-group-image img-responsive" src="<%= activity.image %>" />
+			        </div>
+			        <div class="col-md-10">
+			            <div class="caption">
+			                <p><%= activity.date.toDateString() %> <%= activity.time %></p>
+			                <div class="update-form">
+			                	<% if(currentUser && activity.author.id.equals(currentUser._id)){ %>
+				                	<a class="btn btn-xs btn-warning" href="/activities/<%= activity._id %>/edit">Edit</a>
+				                	<form style="display: inline" class="delete-form" action="/activities/<%= activity._id %>?_method=DELETE" method="POST"><button class="btn btn-xs btn-danger">Delete</button></form>
+				                <% } %>
+			                </div>
+			                <h4 class="group inner list-group-item-heading"><%= activity.title %></h4>
+			                <div class="clearfix">
+			                    <img style="float: left" class="group list-group-image" src="http://placehold.it/30x30/000/fff" alt="" />
+			                    <p style="float: left"><%= activity.author.username %></p>
+			                    <p style="float: right">Limit: <%= activity.ppl_limit %> people</p>
+			                </div>
+			                <p style="clear: both" class="group inner list-group-item-text">
+			                	<%= activity.description %>
+			                </p>
+			            </div>
+			        </div>
+			    </div>
+			    <hr class="divider">
+			    <div class="row">
+			        <div class="col-xs-10 col-md-10">
+			            <p class="lead">People</p>
+			        </div>
+			        <div class="col-xs-2 col-md-2">
+			            <a class="btn btn-success" href="">Join</a>
+			        </div>
+			    </div>
+			</div>
+        </div>
+	<% }) %>
+	
+</div>
+	
+</div>
+
+
+
+
+
+<% include ../partials/footer %>
